@@ -1,20 +1,22 @@
 from flask import render_template
 from app import app
 
+info = {
+    "author": "Matt Briggs",
+    "title": "H",
+    "current_sub": ""
+}
+
+
 @app.route("/")
 def home():
-    posts = [
-        {
-            'author': {'username': 'John'},
-            'body': 'Meep morp human noises!'
-        },
-        {
-            'author': {'username': 'Jane'},
-            'body': 'I too am a human!'
-        }
-    ]
-    return render_template("home.html", title="test title", posts=posts)
+    info.update({"title": "Test Title",
+                 "current_sub": "/"})
+    return render_template("home.html", info=info)
+
 
 @app.route("/index")
 def index():
-    return render_template("index.html", title="\"Home\"")
+    info.update({"title": "\"Home\"",
+                 "current_sub": "/index"})
+    return render_template("index.html", info=info)

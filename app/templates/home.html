@@ -1,12 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>
-    Hello, this is a <i>large</i> header
-</h1>
-{% for post in posts %}
-<div>
-    <p>{{ post.author.username }} says: <b>{{ post.body }}</b></p>
+<div class="container-fluid d-flex h-100">
+    <h4 class="display-4">
+        Hello, this is a <i>large</i> header
+    </h4>
 </div>
-{% endfor %}
+
 {% endblock %}

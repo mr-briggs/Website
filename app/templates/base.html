@@ -1,18 +1,87 @@
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-    {% if title %}
-    <title>{{title }} - mrbriggs</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/cyborg/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-l7xaoY0cJM4h9xh1RfazbgJVUZvdtyLWPueWNtLAphf/UbBgOVzqbOTogxPwYLHM" crossorigin="anonymous">
+
+    {% if info.title %}
+    <title>{{title}}</title>
     {% else %}
-    <title>W</title>
+    <title>PLACEHOLDER TITLE</title>
     {% endif %}
 </head>
 
 <body>
-    <div><a href="/index">Home</a></div>
-    <hr>
-    {% block content %}
-    {% endblock %}
+    <nav id="navbar" class="navbar navbar-expand-sm navbar-dark bg-primary" style="border:0px">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="navbar-item">
+                    <a class="nav-link" href="/">
+                        Home
+                    </a>
+                </li>
+                <li class="navbar-item">
+                    <a class="nav-link" href="/index">
+                        Index
+                    </a>
+                </li>
+                <button id="nav-pin" type="button" class="btn btn-primary" data-toggle="button" title="Pin Navbar">
+                    🖈
+                </button>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="content" class="container vh-100">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        // Navbar highlighting
+        $(document).ready(function () {
+            var url = window.location.pathname;
+            $('ul.navbar-nav a[href="' + url + '"]')
+                .parent().addClass('active');
+            $('ul.navbar-nav a').filter(function () {
+                return this.href == url;
+            }).parent().addClass('active');
+        });
+        // Navbar pin
+        $(document).ready(function () {
+            $('#nav-pin').click(function () {
+                if ($('#navbar').hasClass('fixed-top')) {
+                    $('#navbar').removeClass('fixed-top');
+                    document.getElementById("content").style.marginTop = "0px";
+                } else {
+                    $('#navbar').addClass('fixed-top');
+                    document.getElementById("content").style.marginTop = "53px";
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
